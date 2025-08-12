@@ -1,0 +1,101 @@
+<!DOCTYPE ahtml>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Blake Carver</title>
+    <!-- Use Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Garamond&family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Garamond', serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        h3, h1 {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+        /* Custom styles for the main content area */
+        .content-container {
+            max-width: 100vw;
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        .site-header {
+            font-family: 'Bebas Neue', 'Inter', sans-serif;
+            color: #4a4a4a;
+            background-color: #fff;
+            /* Add any other shared header styles here */
+        }
+        .site-header a {
+            color: #4a4a4a;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- This div is the placeholder for the dynamically loaded header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="container mx-auto px-4 py-8">
+        <main>
+            <div class="content-container">
+                <h1 class="text-3xl font-bold mb-8">Contact Blake</h1>
+                
+                <!-- The contact form has been removed and replaced with a notice -->
+                <div class="text-center bg-gray-100 p-6 rounded-lg mb-8">
+                    <h2 class="text-2xl font-bold mb-4">Connect with Me Directly</h2>
+                    <p class="text-gray-700">
+                        If you would like to get ahold of me more quickly, I am active over on <a href="https://blake-carver.tumblr.com" class="text-blue-600 hover:underline">Tumblr</a> and <a href="https://bsky.app/profile/blakecarver.bsky.social" class="text-blue-600 hover:underline">Bluesky</a>. You're welcome to send an "ask" to my inbox on Tumblr, or you can send me a post—or whatever the equivalent of a "tweet" is—on Bluesky.
+                    </p>
+                </div>
+
+                <hr class="my-8 border-gray-200">
+
+                <!-- "Let's Keep in Touch" Section -->
+                <section class="text-center">
+                    <h2 class="text-2xl font-bold mb-4">Or Find Me on Social Media</h2>
+                    <div class="flex items-center justify-center mb-8">
+                        <div class="flex-grow border-t-2 border-gray-300"></div>
+                        <span class="px-4 text-3xl font-bold text-gray-500">♱</span>
+                        <div class="flex-grow border-t-2 border-gray-300"></div>
+                    </div>
+        
+                    <!-- Social Icons -->
+                    <div class="flex justify-center space-x-6 my-8">
+                        <!-- New Tumblr link -->
+                        <a href="https://blake-carver.tumblr.com" class="transform transition-transform hover:scale-110">
+                            <img src="https://cdn.worldvectorlogo.com/logos/tumblr.svg" alt="Tumblr" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://bsky.app/profile/blakecarver.bsky.social" class="transform transition-transform hover:scale-110">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/2319px-Bluesky_Logo.svg.png" alt="Bluesky" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.instagram.com/blakecarverwrites/" class="transform transition-transform hover:scale-110">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Instagram_logo_2016.svg/768px-Instagram_logo_2016.svg.png" alt="Instagram" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.tiktok.com/@blake_carver/" class="transform transition-transform hover:scale-110">
+                            <img src="https://cdn.worldvectorlogo.com/logos/tiktok-icon-2.svg" alt="TikTok" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                        </a>
+                        <a href="https://www.patreon.com/c/blakecarver" class="transform transition-transform hover:scale-110">
+                            <img src="https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/patreon-icon.png" alt="Patreon" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- This div is the placeholder for the dynamically loaded footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Script tags for dynamically loading the header and footer -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+</body>
+</html>

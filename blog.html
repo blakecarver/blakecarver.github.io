@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | Blake Carver</title>
+    <!-- Use Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* A cleaner, more cohesive design palette. */
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Garamond&family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* A very soft gray-blue */
+            color: #334155; /* A dark slate color */
+        }
+        
+        h3, h1, h2, .post-title {
+            /* Headings are now Bebas Neue as requested */
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 400;
+        }
+
+        /* Custom styles for the main content area */
+        .content-container {
+            max-width: 100vw;
+            background-color: white;
+            border-radius: 1.25rem; /* rounded-2xl */
+            box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+            padding: 2.5rem;
+        }
+
+        /*
+        * Styles for individual blog posts.
+        * The card has a softer background, a more subtle shadow, and a graceful hover effect.
+        */
+        .tumblr-post {
+            border: 1px solid #e2e8f0; /* Soft border color */
+            background-color: #f8fafc; /* Lighter background */
+            padding: 2rem;
+            border-radius: 1rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+            margin-bottom: 2.5rem;
+        }
+        .tumblr-post:hover {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-4px); /* Slightly more pronounced lift on hover */
+        }
+
+        /*
+        * Typography and link styles for the post content.
+        */
+        .post-body, .post-caption, .post-description, .post-quote {
+            /* Post content now inherits from the body rule */
+            margin-top: 1.5rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .post-quote {
+            font-style: italic;
+            border-left: 4px solid #94a3b8; /* A softer blue-gray for the quote border */
+            padding-left: 1rem;
+            font-size: 1.5rem;
+            color: #1a202c;
+        }
+        .post-link-title {
+            color: #3b82f6; /* A consistent blue for links */
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .read-more-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .read-more-link:hover {
+            color: #1e40af;
+        }
+        .post-photo img {
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+
+        /* Header styles */
+        .site-header {
+            font-family: 'Bebas Neue', 'Inter', sans-serif;
+            color: #4a4a4a;
+            background-color: #fff;
+            /* Add any other shared header styles here */
+        }
+        .site-header a {
+            color: #4a4a4a;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- This div is the placeholder for the dynamically loaded header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <div class="content-container">
+            <h1 class="text-4xl text-center md:text-left mb-4 text-gray-800">
+                Blog
+            </h1>
+            <!-- Added the Tumblr redirect button, now smaller -->
+            <div class="mb-4">
+                <a href="https://blake-carver.tumblr.com" target="_blank" class="inline-flex items-center px-3 py-1 text-xs font-medium rounded-full text-white bg-blue-600 hover:bg-blue-700 transition-colors shadow">
+                    <!-- SVG Image for the Tumblr icon -->
+                    <img src="/images/tumblr-icon.svg" alt="Tumblr Icon" class="w-3 h-3 mr-2" />
+                    <span>Redirect to Tumblr</span>
+                </a>
+            </div>
+            
+            <hr class="my-6 border-gray-300">
+            <div id="tumblr-posts-container">
+                <p class="text-center text-gray-500">Loading posts...</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Use an IIFE (Immediately Invoked Function Expression) to avoid polluting the global scope.
+        (function() {
+            // Your provided Tumblr API key and blog name
+            const blogName = 'blake-carver';
+            const apiKey = 'SEunCCCyDWjENmY8QrNeDBPqCw2LNKp6OxJ8BurD1gymtajQPH';
+            const postsContainer = document.getElementById('tumblr-posts-container');
+            
+            // This function fetches posts from the Tumblr API.
+            async function fetchTumblrPosts() {
+                try {
+                    // Start with a clear loading message
+                    postsContainer.innerHTML = '<p class="text-center text-gray-500">Loading posts...</p>';
+                    
+                    // The API URL to fetch all post types, limited to 5 recent posts.
+                    const tumblrApiUrl = `https://api.tumblr.com/v2/blog/${blogName}.tumblr.com/posts?api_key=${apiKey}&limit=5`;
+                    
+                    const response = await fetch(tumblrApiUrl);
+                    
+                    // Check if the network response was successful
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    postsContainer.innerHTML = ''; // Clear loading message
+                    
+                    // Check if the response contains posts
+                    if (data?.response?.posts && data.response.posts.length > 0) {
+                        const posts = data.response.posts;
+                        
+                        posts.forEach(post => {
+                            const postElement = document.createElement('div');
+                            postElement.className = 'tumblr-post';
+                            
+                            switch (post.type) {
+                                case 'text':
+                                    postElement.innerHTML = `
+                                        <h2 class="text-2xl post-title">${post.title || 'Untitled Post'}</h2>
+                                        <div class="post-body">${post.body || 'No content.'}</div>
+                                        <a href="${post.post_url}" target="_blank" class="read-more-link">Read more &rarr;</a>
+                                    `;
+                                    break;
+                                case 'photo':
+                                    const caption = post.caption || '';
+                                    let photosHtml = '';
+                                    if (post.photos && post.photos.length > 0) {
+                                        photosHtml = post.photos.map(photo => {
+                                            const photoUrl = photo.alt_sizes[0]?.url || 'https://placehold.co/600x400';
+                                            return `<img src="${photoUrl}" alt="Tumblr Photo Post" class="rounded-lg w-full h-auto object-cover">`;
+                                        }).join('');
+                                    }
+                                    
+                                    postElement.innerHTML = `
+                                        <h2 class="text-2xl post-title">Photo Post</h2>
+                                        <!-- Using Tailwind's built-in grid classes for a responsive 2-column layout -->
+                                        <div class="grid grid-cols-2 gap-6 mt-4">
+                                            ${photosHtml}
+                                        </div>
+                                        <div class="post-caption mt-4">${caption}</div>
+                                        <a href="${post.post_url}" target="_blank" class="read-more-link">View post &rarr;</a>
+                                    `;
+                                    break;
+                                case 'quote':
+                                    const quote = post.text || 'No quote.';
+                                    const source = post.source || '';
+                                    postElement.innerHTML = `
+                                        <blockquote class="post-quote">"${quote}"</blockquote>
+                                        ${source ? `<div class="post-source text-right text-gray-500 mt-2 italic">${source}</div>` : ''}
+                                        <a href="${post.post_url}" target="_blank" class="read-more-link">View post &rarr;</a>
+                                    `;
+                                    break;
+                                case 'link':
+                                    const linkTitle = post.title || 'Link Post';
+                                    const linkUrl = post.url || '#';
+                                    const description = post.description || '';
+                                    postElement.innerHTML = `
+                                        <h2 class="text-2xl post-title"><a href="${linkUrl}" target="_blank" class="post-link-title">${linkTitle}</a></h2>
+                                        <div class="post-description">${description}</div>
+                                        <a href="${post.post_url}" target="_blank" class="read-more-link">View post &rarr;</a>
+                                    `;
+                                    break;
+                                default:
+                                    postElement.innerHTML = `
+                                        <h2 class="text-2xl post-title">${post.type.charAt(0).toUpperCase() + post.type.slice(1)} Post</h2>
+                                        <a href="${post.post_url}" target="_blank" class="read-more-link">View post &rarr;</a>
+                                    `;
+                            }
+                            
+                            postsContainer.appendChild(postElement);
+                        });
+                    } else {
+                        postsContainer.innerHTML = '<p class="text-center text-gray-500">No posts were found. This may be due to an incorrect blog name or an invalid API key.</p>';
+                    }
+                } catch (error) {
+                    console.error('Failed to fetch Tumblr posts:', error);
+                    postsContainer.innerHTML = '<p class="text-center text-red-500">Failed to load posts. Please check your network connection, blog name, and API key.</p>';
+                }
+            }
+
+            // Function to handle all dynamic content loading
+            function initializePage() {
+                fetchTumblrPosts();
+            }
+
+            // Call the function once the DOM is fully loaded
+            document.addEventListener('DOMContentLoaded', initializePage);
+        })();
+    </script>
+
+    <!-- This div is the placeholder for the dynamically loaded footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Script tags to load the header and footer -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+</body>
+</html>

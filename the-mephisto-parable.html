@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Mephisto Parable | Blake Carver</title>
+    <!-- Use Tailwind CSS for modern, responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+        
+        body {
+            font-family: 'EB Garamond', serif;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        h3, h1 {
+            font-family: 'Bebas Neue', sans-serif;
+        }
+
+        /* --- General Page Layout --- */
+        .book-page-container {
+            max-width: 960px;
+            margin: 20px auto;
+            font-family: "EB Garamond", serif;
+            line-height: 1.6;
+            color: #333;
+            padding: 0 1rem; /* Added padding for smaller screens */
+        }
+
+        .book-content-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 768px) {
+            .book-content-wrapper {
+                flex-direction: row;
+                gap: 40px;
+            }
+        }
+
+        /* --- Sidebar Styling (Left Column) --- */
+        .book-sidebar {
+            flex-basis: 250px;
+            flex-shrink: 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .book-cover {
+            width: 100%;
+            height: auto;
+            max-width: 250px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .purchase-section {
+            /* Added margin to create space between the image and the button */
+            margin-top: 20px;
+        }
+
+        .purchase-section h3 {
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .purchase-button {
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            padding: 10px;
+            margin-bottom: 10px;
+            /* Reverted to a faded look */
+            background-color: #cccccc;
+            color: #666666;
+            text-decoration: none;
+            font-size: 0.9em;
+            border: none;
+            text-align: center;
+            border-radius: 0.25rem;
+            cursor: not-allowed; /* Change cursor to not-allowed to indicate it's not clickable */
+        }
+        
+        .purchase-button:hover {
+            /* Removed hover effect since it's not a link */
+            background-color: #cccccc;
+        }
+
+
+        /* --- Main Content Styling (Right Column) --- */
+        .book-main-content {
+            flex-grow: 1;
+        }
+
+        .book-main-content h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 15px;
+        }
+
+        .book-main-content h3 {
+            font-size: 1.5em;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .book-main-content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Header Styles */
+        .site-header {
+            font-family: 'Bebas Neue', 'Inter', sans-serif;
+            color: #4a4a4a;
+            background-color: #fff;
+            /* Add any other shared header styles here */
+        }
+        .site-header a {
+            color: #4a4a4a;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- This div is the placeholder for the dynamically loaded header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content Wrapper -->
+    <div class="container mx-auto px-4 py-8">
+        <main>
+            <div class="book-page-container">
+                <div class="book-content-wrapper">
+
+                    <div class="book-sidebar">
+                        <!-- Placeholder image for the book cover -->
+                        <img src="/images/The Mephisto Parable Cover.jpg" alt="Book Cover for The Mephisto Parable" class="book-cover">
+
+                        <div class="purchase-section">
+                            <div class="purchase-button">Coming Soon</div>
+                        </div>
+                    </div>
+
+                    <div class="book-main-content">
+                        <h2>The Mephisto Parable</h2>
+                        <p>"The Mephisto Parable" is an upcoming work, with a release date not yet scheduled. Stay tuned for more information and exclusive sneak peeks by subscribing to the author's Patreon.</p>
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="w-full border-t-2 border-gray-300 my-8"></div>
+
+                <!-- Read an Excerpt Section -->
+                <div class="read-excerpt-section mt-8">
+                    <h3 class="text-xl font-bold mb-4">Read an Excerpt</h3>
+                    <p class="text-gray-700 mb-4">Excerpt links will be compiled below, with a temporary title, that will redirect you to the post.</p>
+                    <p class="text-gray-700 mb-4">N/A</p>
+                </div>
+            </div>
+        </main>
+        
+        <!-- "Let's Keep in Touch" Section -->
+        <section class="mt-12 text-center">
+            <h2 class="text-2xl font-bold mb-4">Let's keep in touch</h2>
+            <div class="flex items-center justify-center mb-8">
+                <div class="flex-grow border-t-2 border-gray-300"></div>
+                <span class="px-4 text-3xl font-bold text-gray-500">♱</span>
+                <div class="flex-grow border-t-2 border-gray-300"></div>
+            </div>
+
+            <!-- Social Icons -->
+            <div class="flex justify-center space-x-6 my-8">
+                <a href="https://bsky.app/profile/blakecarver.bsky.social" class="transform transition-transform hover:scale-110">
+                    <img src="/images/Bluesky_Logo.svg.png" alt="Bluesky" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                </a>
+                <a href="https://www.instagram.com/blakecarverwrites/" class="transform transition-transform hover:scale-110">
+                    <img src="/images/Instagram_logo_2016.svg.png" alt="Instagram" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                </a>
+                <a href="https://www.tiktok.com/@blake_carver/" class="transform transition-transform hover:scale-110">
+                    <img src="/images/tiktok-icon-2.svg" alt="TikTok" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                </a>
+                <a href="https://www.patreon.com/c/blakecarver" class="transform transition-transform hover:scale-110">
+                    <img src="/images/patreon-icon.webp" alt="Patreon" class="h-6 w-6 grayscale hover:grayscale-0 transition-all">
+                </a>
+            </div>
+
+            <!-- Newsletter Embed -->
+            <div class="mx-auto w-full max-w-[480px]">
+                <p class="text-gray-700 mb-4 px-4">Signup to receive periodic updates via email directly to your inbox.</p>
+                <iframe src="https://feastofprose.substack.com/embed" width="100%" height="150" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+            </div>
+        </section>
+    </div>
+
+    <!-- This div is the placeholder for the dynamically loaded footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Script tags for dynamically loading the header and footer -->
+    <script src="header.js"></script>
+    <script src="footer.js"></script>
+
+</body>
+</html>
